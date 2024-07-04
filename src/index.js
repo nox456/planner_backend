@@ -2,6 +2,7 @@ import express from "express";
 import { HOST, PORT } from "./config/env.js";
 import morgan from "morgan";
 import routes from "./routes/index.routes.js";
+import cookie_parser from "cookie-parser"
 
 console.clear();
 const app = express();
@@ -12,6 +13,7 @@ app.use(morgan("dev"));
 
 // Routes
 app.use(routes);
+app.use(cookie_parser())
 
 // Start Server
 app.listen(PORT, HOST, () => {

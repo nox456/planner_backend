@@ -8,6 +8,9 @@ export default class AuthService {
 
         const encryptedPassword = await Auth.encryptPassword(password)
 
-        await Auth.signup(username,encryptedPassword)
+        const id = await Auth.signup(username,encryptedPassword)
+        const token = await Auth.generateToken(id) 
+
+        return {token}
     }
 }
