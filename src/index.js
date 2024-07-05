@@ -10,10 +10,10 @@ const app = express();
 // Middlewares
 app.use(express.json())
 app.use(morgan("dev"));
+app.use(cookie_parser())
 
 // Routes
 app.use(routes);
-app.use(cookie_parser())
 
 // Start Server
 app.listen(PORT, HOST, () => {

@@ -25,4 +25,16 @@ export default class Auth {
     static generateToken(id) {
         return jwt.sign(id, JWT_SECRET);
     }
+    static async comparePassword(username,password) {
+        let matchPassword
+        try {
+            const data = await db.query("SELECT password FROM users WHERE username = $1", [username])
+            const storedPassword = data.rows[0].password
+
+            matchPassword = await bcryptjs.compare(password,storedPassword)
+        } catch(e) {
+            console.error(e)
+        }
+        return matchPassword
+    }
 }

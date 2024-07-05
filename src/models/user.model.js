@@ -11,4 +11,14 @@ export default class User {
         }
         return exists
     }
+    static async getId(username) {
+        let id
+        try {
+            const data = await db.query("SELECT id FROM users WHERE username = $1", [username])
+            id = data.rows[0].id
+        } catch(e) {
+            console.error(e)
+        }
+        return id
+    }
 }
