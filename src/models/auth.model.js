@@ -22,7 +22,7 @@ export default class Auth {
         const encryptedPassword = await bcryptjs.hash(password, salt);
         return encryptedPassword;
     }
-    static async generateToken(id) {
+    static generateToken(id) {
         return jwt.sign(id, JWT_SECRET);
     }
 }
