@@ -12,4 +12,21 @@ export default class Task {
             console.error(e);
         }
     }
+    static async setDone(id) {
+        try {
+            await db.query("UPDATE tasks SET is_done = true WHERE id = $1", [id])
+        } catch(e) {
+            console.error(e)
+        }
+    }
+    static async checkIfExists(id) {
+        let exists
+        try {
+            const data = await db.query("SELECT count(*) FROM tasks WHERE id = $1", [id])
+            exists = data.rows[0].count > 0 
+        } catch(e) {
+            console.error(e)
+        }
+        return exists
+    }
 }

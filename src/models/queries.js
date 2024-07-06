@@ -2,7 +2,7 @@ export const USER_INFO = `
 SELECT
     users.username,
     users.score,
-    achievements.completed
+    achievements.completed as achievements
 FROM (
     SELECT 
         username,
@@ -19,6 +19,7 @@ FROM (
 `
 export const USER_TASKS = `
 SELECT
+    id,
     name,
     course,
     topic,

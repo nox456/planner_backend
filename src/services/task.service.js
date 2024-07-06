@@ -12,4 +12,10 @@ export default class TaskService {
 
         await Task.save(data, user_id);
     }
+    static async setDone(id) {
+        const taskExists = await Task.checkIfExists(id)
+        if (!taskExists) return { taskNotExists: true }
+
+        await Task.setDone(id)
+    }
 }
