@@ -18,4 +18,10 @@ export default class TaskService {
 
         await Task.setDone(id)
     }
+    static async delete(id) {
+        const taskExists = await Task.checkIfExists(id)
+        if (!taskExists) return { taskNotExists: true }
+
+        await Task.delete(id)
+    }
 }

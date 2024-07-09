@@ -29,4 +29,11 @@ export default class Task {
         }
         return exists
     }
+    static async delete(id) {
+        try {
+            await db.query("DELETE FROM tasks WHERE id = $1", [id])
+        } catch(e) {
+            console.error(e)
+        }
+    }
 }

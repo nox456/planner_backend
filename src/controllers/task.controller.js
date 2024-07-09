@@ -36,4 +36,21 @@ export default class TaskController {
             return res.status(200).json({ message: "Task doned!" });
         }
     }
+    static async delete(req, res) {
+        const { id } = req.query;
+        let result;
+        try {
+            result = await TaskService.delete(id);
+        } catch (e) {
+            console.error(e);
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
+        if (result?.taskNotExists) {
+            return res
+                .status(404)
+                .json({ message: "Task doesn't exists!", data: id });
+        } else {
+            return res.status(200).json({ message: "Task deleted!" });
+        }
+    }
 }
