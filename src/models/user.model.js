@@ -1,5 +1,5 @@
 import db from "../connections/database.js";
-import { USER_INFO, USER_TASKS } from "./queries.js";
+import { USER_TASKS } from "./queries.js";
 
 export default class User {
     static async checkIfExists(username) {
@@ -41,7 +41,7 @@ export default class User {
     static async getInfo(id) {
         let info;
         try {
-            const data1 = await db.query(USER_INFO, [id]);
+            const data1 = await db.query("SELECT username,score FROM users WHERE id = $1", [id]);
             const user_info = data1.rows[0];
             const data2 = await db.query(USER_TASKS, [id]);
             const user_tasks = data2.rows;
@@ -57,6 +57,13 @@ export default class User {
     static async delete(id) {
         try {
             await db.query("DELETE FROM users WHERE id = $1", [id])
+        } catch(e) {
+            console.error(e)
+        }
+    }
+    static async addScore(id,points) {
+        try {
+            await db.query("UPDATE users SET score = score + $1 WHERE id = $2", [points, id])
         } catch(e) {
             console.error(e)
         }

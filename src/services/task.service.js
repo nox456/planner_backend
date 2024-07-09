@@ -2,6 +2,7 @@ import Task from "../models/task.model.js";
 import User from "../models/user.model.js";
 import Auth from "../models/auth.model.js"
 import Achievement from "../models/achievement.model.js";
+import Requirement from "../models/requirement.model.js";
 
 export default class TaskService {
     static async save(data, token) {
@@ -19,6 +20,15 @@ export default class TaskService {
 
         const user_id = Auth.decodeToken(token)
         await Achievement.addProgress(user_id)
+
+        const achievements = await Achievement.getAll(user_id)
+
+        for (const achievement of achievements) {
+            const requirement = await Requirement.getById(achievement.requirement)
+            if (achievement.progress == requirement.value) {
+                await User.addScore(user_id,achievement.reward)
+            }
+        }
 
         await Task.setDone(id)
     }

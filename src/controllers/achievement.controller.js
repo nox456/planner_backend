@@ -8,7 +8,7 @@ export default class AchievementController {
             result = await AchievementService.getAll(token);
             result = result.filter((a) => {
                 const [progress, value] = a.progress.split("/");
-                return progress != value;
+                return parseInt(progress) < parseInt(value);
             });
         } catch (e) {
             console.error(e);
@@ -32,9 +32,9 @@ export default class AchievementController {
         let result;
         try {
             result = await AchievementService.getAll(token);
-            result.filter((a) => {
+            result = result.filter((a) => {
                 const [progress, value] = a.progress.split("/");
-                return progress == value;
+                return parseInt(progress) >= parseInt(value);
             });
         } catch (e) {
             console.error(e);

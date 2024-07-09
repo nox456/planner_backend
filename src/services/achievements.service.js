@@ -16,7 +16,7 @@ export default class AchievementService {
             fullAchievements.push({
                 name: achievement.name,
                 reward: achievement.reward,
-                progress: `${achievement.progress}/${requirement.value}`,
+                progress: `${achievement.progress > requirement.value ? requirement.value : achievement.progress}/${requirement.value}`,
                 requirement: requirement.name,
             });
         }
