@@ -29,4 +29,11 @@ export default class Achievement {
             console.error(e);
         }
     }
+    static async addProgress(user_id) {
+        try {
+            await db.query('UPDATE user_achievements SET progress = progress + 1 WHERE "user" = $1', [user_id])
+        } catch(e) {
+            console.error(e)
+        }
+    }
 }

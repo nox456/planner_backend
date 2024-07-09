@@ -21,9 +21,10 @@ export default class TaskController {
     }
     static async setDone(req, res) {
         const { id } = req.query;
+        const { token } = req.cookies;
         let result;
         try {
-            result = await TaskService.setDone(id);
+            result = await TaskService.setDone(id, token);
         } catch (e) {
             console.error(e);
             return res.status(500).json({ message: "Internal Server Error" });

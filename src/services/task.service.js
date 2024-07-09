@@ -1,6 +1,7 @@
 import Task from "../models/task.model.js";
 import User from "../models/user.model.js";
 import Auth from "../models/auth.model.js"
+import Achievement from "../models/achievement.model.js";
 
 export default class TaskService {
     static async save(data, token) {
@@ -12,9 +13,12 @@ export default class TaskService {
 
         await Task.save(data, user_id);
     }
-    static async setDone(id) {
+    static async setDone(id, token) {
         const taskExists = await Task.checkIfExists(id)
         if (!taskExists) return { taskNotExists: true }
+
+        const user_id = Auth.decodeToken(token)
+        await Achievement.addProgress(user_id)
 
         await Task.setDone(id)
     }
