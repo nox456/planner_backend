@@ -1,5 +1,6 @@
 import Auth from "../models/auth.model.js";
 import User from "../models/user.model.js";
+import Achievement from "../models/achievement.model.js";
 
 export default class AuthService {
     static async signup(username, password) {
@@ -10,6 +11,8 @@ export default class AuthService {
 
         const id = await Auth.signup(username, encryptedPassword);
         const token = Auth.generateToken(id);
+
+        await Achievement.linkUser(id)
 
         return { token };
     }
