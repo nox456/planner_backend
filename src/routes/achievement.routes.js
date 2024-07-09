@@ -3,6 +3,7 @@ import AchievementController from "../controllers/achievement.controller.js";
 
 const router = Router()
 
-router.get("/", AchievementController.getAll)
+router.get("/unfinished", AchievementController.getUnfinished)
+router.get("/finished", AchievementController.getFinished)
 
 export default router
