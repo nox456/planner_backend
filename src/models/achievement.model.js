@@ -7,8 +7,11 @@ export default class Achievement {
             const data = await db.query("SELECT * FROM achievements");
             achievements = data.rows;
             for (const achievement of achievements) {
-                const data2 = await db.query('SELECT progress FROM user_achievements WHERE "user" = $1 AND achievement = $2', [user_id, achievement.id])
-                achievement.progress = data2.rows[0].progress
+                const data2 = await db.query(
+                    'SELECT progress FROM user_achievements WHERE "user" = $1 AND achievement = $2',
+                    [user_id, achievement.id],
+                );
+                achievement.progress = data2.rows[0].progress;
             }
         } catch (e) {
             console.error(e);
@@ -31,9 +34,12 @@ export default class Achievement {
     }
     static async addProgress(user_id) {
         try {
-            await db.query('UPDATE user_achievements SET progress = progress + 1 WHERE "user" = $1', [user_id])
-        } catch(e) {
-            console.error(e)
+            await db.query(
+                'UPDATE user_achievements SET progress = progress + 1 WHERE "user" = $1',
+                [user_id]
+            );
+        } catch (e) {
+            console.error(e);
         }
     }
 }
