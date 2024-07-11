@@ -1,5 +1,5 @@
 import express from "express";
-import { HOST, PORT } from "./config/env.js";
+import { HOST, PORT,FRONTEND_HOST } from "./config/env.js";
 import morgan from "morgan";
 import routes from "./routes/index.routes.js";
 import cookie_parser from "cookie-parser"
@@ -11,6 +11,14 @@ const app = express();
 app.use(express.json())
 app.use(morgan("dev"));
 app.use(cookie_parser())
+app.use((_,res,next) => {
+    res.set({
+        'Access-Control-Allow-Origin': FRONTEND_HOST,
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Credentials': 'true'
+    })
+    next()
+})
 
 // Routes
 app.use(routes);
