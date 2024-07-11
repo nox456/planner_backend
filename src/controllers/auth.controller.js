@@ -14,7 +14,7 @@ export default class AuthController {
         }
         if (result?.userExists) {
             return res
-                .status(401)
+                .status(400)
                 .json({ message: "User already exists!", data: username });
         } else {
             res.cookie("token", result.token, { httpOnly: true, secure: true });
