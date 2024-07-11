@@ -15,7 +15,8 @@ app.use((_,res,next) => {
     res.set({
         'Access-Control-Allow-Origin': FRONTEND_HOST,
         'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Credentials': 'true'
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': '*'
     })
     next()
 })
