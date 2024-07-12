@@ -22,6 +22,7 @@ export default class AuthController {
         }
     }
     static async signin(req, res) {
+        console.log(req.cookies)
         if (req.cookies.token)
             return res.status(200).json({ message: "User authenticated!" });
         const { username, password } = req.body;
