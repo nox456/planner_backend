@@ -17,7 +17,7 @@ export default class AchievementController {
         if (result.length == 0) {
             return res
                 .status(404)
-                .json({ message: "Achievements unfinished not founded!" });
+                .json({ message: "Achievements unfinished not founded!", data: [] });
         } else {
             return res
                 .status(200)
@@ -43,7 +43,7 @@ export default class AchievementController {
         if (result.length == 0) {
             return res
                 .status(404)
-                .json({ message: "Achievements finished not founded!" });
+                .json({ message: "Achievements finished not founded!", data: [] });
         } else {
             return res
                 .status(200)

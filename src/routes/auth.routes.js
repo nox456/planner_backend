@@ -6,6 +6,7 @@ const router = Router();
 router.post("/signup", AuthController.signup);
 router.post("/signin", AuthController.signin);
 router.get("/is-authenticated", (req, res) => {
+    console.log(req.cookies)
     if (!req.cookies.token)
         return res.status(401).json({ message: "Unauthorized!" });
     return res.status(200).json({ message: "User authenticated!" });
