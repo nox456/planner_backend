@@ -1,5 +1,6 @@
 import { Router } from "express";
 import AuthController from "../controllers/auth.controller.js";
+import { SECURE_COOKIES } from "../config/env.js";
 
 const router = Router();
 
@@ -11,7 +12,7 @@ router.get("/is-authenticated", (req, res) => {
     return res.status(200).json({ message: "User authenticated!" });
 });
 router.get("/logout", (req, res) => {
-    res.clearCookie("token", { httpOnly: true }).json({ message: "Logout!" });
+    res.clearCookie("token", { httpOnly: true, secure: SECURE_COOKIES, sameSite: "none" }).json({ message: "Logout!" });
 });
 
 export default router;
