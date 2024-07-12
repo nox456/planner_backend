@@ -43,4 +43,14 @@ export default class UserController {
             return res.status(200).json({ message: "User deleted!" });
         }
     }
+    static async leaderboard(req, res) {
+        let result;
+        try {
+            result = await UserService.leaderboard();
+        } catch (e) {
+            console.error(e);
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
+        return res.status(200).json({ message: "Leaderboard!", data: result });
+    }
 }

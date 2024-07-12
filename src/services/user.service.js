@@ -37,4 +37,8 @@ export default class UserService {
 
         await User.delete(id)
     }
+    static async leaderboard() {
+        const users = await User.getAll()
+        return users
+    }
 }

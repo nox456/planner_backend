@@ -68,4 +68,14 @@ export default class User {
             console.error(e)
         }
     }
+    static async getAll() {
+        let users
+        try {
+            const data = await db.query("SELECT username,score FROM users ORDER BY score DESC")
+            users = data.rows
+        } catch(e) {
+            console.error(e)
+        }
+        return users
+    }
 }
