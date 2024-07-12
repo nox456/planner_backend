@@ -16,7 +16,7 @@ app.use((_,res,next) => {
         'Access-Control-Allow-Origin': FRONTEND_HOST,
         'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Methods': '*'
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
     })
     next()
 })
