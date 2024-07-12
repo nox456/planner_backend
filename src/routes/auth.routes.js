@@ -10,5 +10,8 @@ router.get("/is-authenticated", (req, res) => {
         return res.status(401).json({ message: "Unauthorized!" });
     return res.status(200).json({ message: "User authenticated!" });
 });
+router.get("/logout", (req, res) => {
+    res.clearCookie("token", { httpOnly: true }).json({ message: "Logout!" });
+});
 
 export default router;
