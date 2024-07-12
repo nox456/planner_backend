@@ -1,3 +1,4 @@
+import { SECURE_COOKIES } from "../config/env.js";
 import AuthService from "../services/auth.service.js";
 
 export default class AuthController {
@@ -17,7 +18,7 @@ export default class AuthController {
                 .status(400)
                 .json({ message: "User already exists!", data: username });
         } else {
-            res.cookie("token", result.token, { httpOnly: true, sameSite: "none" });
+            res.cookie("token", result.token, { httpOnly: true, sameSite: "none", secure: SECURE_COOKIES });
             return res.status(200).json({ message: "User created!" });
         }
     }
@@ -44,7 +45,7 @@ export default class AuthController {
                 .status(401)
                 .json({ message: "Password incorrect!", data: password });
         } else {
-            res.cookie("token", result.token, { httpOnly: true, sameSite: "none"  });
+            res.cookie("token", result.token, { httpOnly: true, sameSite: "none", secure: SECURE_COOKIES });
             return res.status(200).json({ message: "User authenticated!" });
         }
     }
