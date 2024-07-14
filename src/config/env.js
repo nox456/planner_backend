@@ -10,6 +10,9 @@ if (!process.env.FRONTEND_HOST) {
 if (!process.env.SECURE_COOKIES) {
     throw new Error("Env var SECURE_COOKIES not defined")
 }
+if (!process.env.SAMESITE_COOKIES) {
+    throw new Error("Env var SAMESITE_COOKIES not defined")
+}
 
 export const HOST = process.env.HOST;
 export const PORT = process.env.PORT;
@@ -17,3 +20,4 @@ export const DB_URL = process.env.DB_URL;
 export const JWT_SECRET = process.env.JWT_SECRET;
 export const FRONTEND_HOST = process.env.FRONTEND_HOST
 export const SECURE_COOKIES = process.env.SECURE_COOKIES
+export const SAMESITE_COOKIES = process.env.SAMESITE_COOKIES
